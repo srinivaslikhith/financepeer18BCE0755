@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Student login</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style1.css') }}">
+  <!link rel="stylesheet" href="style.css">
+</head>
+<style>
+		.big{
+		top:70;
+		background-color:white;
+		margin-top:80px;
+		margin-left:550px;
+		margin-right:550px;
+		height:200px;
+		border-radius: 25px;
+		border: 3px solid #4a77d4;
+		box-shadow: 6px 8px 4px grey;
+		text-align:center;
+		}
+		.row{
+		
+		height:150px;
+		
+		}
+		.col{
+			margin:10px;
+			margin-left:50px;	
+			margin-right:50px;
+			border-radius: 25px;
+			border: 1px solid #4a77d4;
+			box-shadow: 0px 8px 4px grey;
+			text-align:center;
+		}
+		.ext{
+		margin-top:25px;
+		line-height:40px;
+		}
+		.ext1{
+		margin-top:40px;
+		line-height:50px;
+		font-size:25px;
+		color:#f95450;
+		}
+		
+</style>
+<body style = "text-align:center;" id = "body">
+	
+	<h1 style = "color:green;" >
+		Dash board
+	</h1>
+	
+	
+	<button onclick = "constructTable('#table')">
+		click here
+	</button>
+	
+	<br><br>
+	
+	<table align = "center"
+			id="table" border="1">
+	</table>
+	
+	<script>
+		var el_up = document.getElementById("GFG_UP");
+		
+		var list = [
+					{
+			"userId": 1,
+			"id": 1,
+			"title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+			"body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+			},
+			{
+			"userId": 1,
+			"id": 2,
+			"title": "qui est esse",
+			"body": "est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla"
+			},
+			{
+			"userId": 1,
+			"id": 3,
+			"title": "ea molestias quasi exercitationem repellat qui ipsa sit aut",
+			"body": "et iusto sed quo iure\nvoluptatem occaecati omnis eligendi aut ad\nvoluptatem doloribus vel accusantium quis pariatur\nmolestiae porro eius odio et labore et velit aut"
+			},
+			{
+			"userId": 1,
+			"id": 4,
+			"title": "eum et est occaecati",
+			"body": "ullam et saepe reiciendis voluptatem adipisci\nsit amet autem assumenda provident rerum culpa\nquis hic commodi nesciunt rem tenetur doloremque ipsam iure\nquis sunt voluptatem rerum illo velit"
+			},
+			{
+			"userId": 1,
+			"id": 5,
+			"title": "nesciunt quas odio",
+			"body": "repudiandae veniam quaerat sunt sed\nalias aut fugiat sit autem sed est\nvoluptatem omnis possimus esse voluptatibus quis\nest aut tenetur dolor neque"
+			}
+		];
+		
+		el_up.innerHTML = "Click on the button to create "
+				+ "the table from the JSON data.<br><br>"
+				+ JSON.stringify(list[0]) + "<br>"
+				+ JSON.stringify(list[1]) + "<br>"
+				+ JSON.stringify(list[2]) + "<br>"
+				+JSON.stringify(list[3]);
+			
+		function constructTable(selector) {
+			
+			// Getting the all column names
+			var cols = Headers(list, selector);
+
+			// Traversing the JSON data
+			for (var i = 0; i < list.length; i++) {
+				var row = $('<tr/>');
+				for (var colIndex = 0; colIndex < cols.length; colIndex++)
+				{
+					var val = list[i][cols[colIndex]];
+					
+					// If there is any key, which is matching
+					// with the column name
+					if (val == null) val = "";
+						row.append($('<td/>').html(val));
+				}
+				
+				// Adding each row to the table
+				$(selector).append(row);
+			}
+		}
+		
+		function Headers(list, selector) {
+			var columns = [];
+			var header = $('<tr/>');
+			
+			for (var i = 0; i < list.length; i++) {
+				var row = list[i];
+				
+				for (var k in row) {
+					if ($.inArray(k, columns) == -1) {
+						columns.push(k);
+						
+						// Creating the header
+						header.append($('<th/>').html(k));
+					}
+				}
+			}
+			
+			// Appending the header to the table
+			$(selector).append(header);
+				return columns;
+		}	
+	</script>
+</body>
+</html>
